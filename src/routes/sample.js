@@ -16,6 +16,7 @@ router.post('/sample', (req, res) => {
       if (!doc || doc.length === 0) {
         return res.status(500).send(doc)
       }
+      //201 = resource was created
       res.status(201).send(doc)
     })
     .catch(err => {
