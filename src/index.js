@@ -3,20 +3,23 @@ let express  = require('express')
 let app = express()
 let path = require('path')
 let bodyParser = require('body-parser')
+let mongodb = require('mongodb')
+
 // File inclusions
-let personRoute = require('./routes/person')
-let sampleRoute = require('./routes/sample')
+let physicianRoute = require('./routes/physicians')
 
 app.use(bodyParser.json())
 app.use((req, res, next) => {
   console.log(`${new Date().toString} => ${req.originalUrl}, req.body`)
   next()
 })
-
-app.use(personRoute)
-app.use(sampleRoute)
 // Allows displaying of .html files from ../public
 app.use(express.static('public'))
+app.use(physicianRoute)
+
+
+
+
 
 // ERROR 404 Handling
 app.use((req, res, next) => {

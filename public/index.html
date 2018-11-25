@@ -5,9 +5,9 @@
 
 <body>
   <h1 class="h1"> Home Page</h1>
-  <form class="user-input" id="userInput">
-    <h2> Enter in format (FIRST MIDDLE LAST) (MIDDLE is optional): </h2><br>
-    <input type="text" name="input">
+  <form id="contact-form">
+    <label for="fmlName">Enter the first, middle, and last name of the physician </label><br>
+    <input type="text" name="name" value="<%= qs.person% ">
     <input type="submit" name="submit">
   </form>
 </body>
