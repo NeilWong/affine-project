@@ -25,19 +25,52 @@ router.post('/sample', (req, res) => {
 })
 
 // GET
-router.get('./sample', (req, res) => {
-  if (!req.query.fName && !req.query.lName) {
-    return res.status(400).send("Missing URL parameter: first name & last name")
+router.get('/sample', (req, res) => {
+  if (!req.query.email) {
+    return res.status(400).send("Missing URL parameter: email")
   }
   SampleModel.findOne({
-    fName: req.query.fName,
-    lName: req.query.lName
+    email: req.query.email
   })
   .then(doc => {
     res.json(doc)
   })
   .catch(err => {
     res.stats(500).json(err)
+  })
+})
+
+// PUT
+router.put('/sample', (req, res) => {
+  if (!req.query.email) {
+    return res.status(400).send('Missing URL parameter: email')
+  }
+  SampleModel.findOneAndUpdate({
+    email: req.query.email
+  },  req.body, {
+    new: true
+  })
+  .then(doc => {
+    res.json(doc)
+  })
+  .catch(err => {
+    res.status(500).json(err)
+  })
+})
+
+// DELETE
+router.delete('/sample', (req, res) => {
+  if (!req.query.email) {
+    return res.status(400).send('Missing URL parameter: email')
+  }
+  SampleModel.findOneAndRemove({
+    email: req.query.email
+  })
+  .then(doc => {
+    res.json(doc)
+  })
+  .catch(err => {
+    res.status(500).json(err)
   })
 })
 

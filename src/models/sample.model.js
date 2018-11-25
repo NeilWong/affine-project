@@ -10,21 +10,13 @@ const password = 'NKW_t3ch!1'
 mongoose.connect(`mongodb://${user}:${password}@${server}/${database}`, {useNewUrlParser: true})
 
 let SampleSchema = new mongoose.Schema({
-  fName: {
-    type: String,
-    required: true
-  },
-  mName: String,
-  lName: {
-    type: String,
-    required: true
-  },
-  address: {
+  fName: String,
+  // verification for this done in app layer itself (mongoose) not by mongodb
+  email: {
     type: String,
     required: true,
     unique: true
   }
-
 })
 
 module.exports = mongoose.model('Sample', SampleSchema)
