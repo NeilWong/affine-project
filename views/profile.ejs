@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href='assets/index.css' rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+  <div class="container" style="text-align:center;">
+    <h2 style="text-align:center;"> Address is:</h2>
+    <h2 id="location-input" style="text-align:center;" value="<%= address %>"> <%= address %></h2>
+    </div>
+
+    <div id="map"></div>
+
+    <!-- Scripts -->
+    <script>
+      // Initialize and add the map
+      function initMap(e) {
+      // The location of Uluru
+      var uluru = {lat: -25.344, lng: 131.036};
+      // The map, centered at Uluru
+      var map = new google.maps.Map(
+        document.getElementById('map'), {zoom: 4, center: uluru});
+      // The marker, positioned at Uluru
+      var marker = new google.maps.Marker({position: uluru, map: map});
+      }
+  </script>
+  <script>
+    //Function implementation
+    function geocode(e) {
+      var location = document.getElementById('location-input').innerHTML;
+      axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+        params: {
+          address: location,
+          key: 'AIzaSyA9Z37jczHerbZt-c8QXn18cHBopL_bZzo'
+        }
+      })
+      .then(res => {
+        // Log full response
+        console.log(res)
+        // Formatted address
+        var formattedAddress = res.data.results[0].formatted_address;
+        var formattedAddressOutput = `
+          <ul class="list-group">
+            <li class="list-group-item">${formattedAddress}</li>
+          </ul>
+        `
+        // Address components
+        var addressComponents = res.data.results[0].address_components;
+        var latitude = res.data.results[0].geometry.location.lat;
+        var longitude = res.data.results[0].geometry.location.lng;
+
+        var coords = {lat: latitude, lng: longitude};
+        // Display map centered at the coords
+        var map = new google.maps.Map(
+          document.getElementById('map'), {zoom: 4, center: coords});
+          // The marker, positioned at coords
+          var marker = new google.maps.Marker({position: coords, map: map});
+        // Output to app
+        document.getElementById('formatted-address').innerHTML = formattedAddressOutput;
+
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
+  </script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9Z37jczHerbZt-c8QXn18cHBopL_bZzo&callback=initMap">
+  </script>
+  <script>
+    geocode();
+  </script>
+</body>
+
+</html>

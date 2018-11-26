@@ -1,0 +1,21 @@
+.h1 {
+  text-align: center;
+}
+.user-input {
+  text-align: center;
+  color: black;
+}
+#map {
+  margin-top: 50px;
+  width: 50%;
+  margin: 0 auto;
+  height: 400px;
+  background-color: grey;
+}
+#request-form {
+  text-align: center;
+  padding-bottom: 50px;
+}
+.submit-container {
+  text-align: center;
+}

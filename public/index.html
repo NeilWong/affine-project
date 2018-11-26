@@ -1,15 +1,23 @@
 <!DOCTYPE html>
+<html>
 <head>
-  <link rel="stylesheet" type="text/css" href="../index.css"/>
+  <link href='assets/index.css' rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
-  <h1 class="h1"> Home Page</h1>
-  <form id="contact-form">
-    <label for="fmlName">Enter the first, middle, and last name of the physician </label><br>
-    <input type="text" name="name" value="<%= qs.person% ">
-    <input type="submit" name="submit">
-  </form>
+  <div class="container">
+    <h1 class="h1"> Home Page</h1>
+    <form id="location-form" method="get" action="/physician">
+      <label form="requestName">Enter the first, middle(optional), and last name of a physician:</label><br>
+      <input type="text" name="Physician_First_Name" class="form-control form-control-lg"><br>
+      <input type="text" name="Physician_Middle_Name" class="form-control form-control-lg"><br>
+      <input type="text" name="Physician_Last_Name" class="form-control form-control-lg"><br>
+      <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    </form>
+    <div id="formatted-address"></div>
+  </div>
 </body>
 
 </html>
