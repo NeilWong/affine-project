@@ -23,7 +23,7 @@ router.get('/physician', (req, res) => {
       res.render('profile', {address: address})
     })
     .catch(err => {
-      res.stats(500).json(err)
+      console.log("physican request error")
     })
   } else {
     console.log("passed")
